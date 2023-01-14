@@ -1,0 +1,90 @@
+<div class="p-3">
+  <div class="row">
+  <div class="col-md-6 offset-3">
+    <div class="card">
+      <div *ngIf="formStatus==1" class="alert alert-success">
+        <label>User Registration Success </label>
+        <button class="btn btn-success" routerLink="/login">Login</button>
+      </div>
+      <div *ngIf="formStatus==2" class="alert alert-danger">
+        {{errorMessage}}
+      </div>
+      <ng-template #error_template>{{errorMessage}}</ng-template>
+      <div class="card-header">New User Registration</div>
+      <div class="card-body" *ngIf="registrationFormGroup">
+        <form [formGroup]="registrationFormGroup" (ngSubmit)="registerUser()">
+          <div class="mb-3">
+            <label class="form-label">Username :</label>
+            <input class="form-control" type="text" formControlName="username">
+            <span class="text-danger" *ngIf="username.errors && (username.valid==false) &&(username['dirty']|| username['touched'])">
+              <span *ngIf="username.errors!['usernameDuplicated']">
+                This Username is not available
+              </span>
+              <span *ngIf="username.errors!['required']">
+                The username is Required
+              </span>
+            </span>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Last Name :</label>
+            <input class="form-control" type="text" formControlName="lastName">
+            <div *ngIf="lastName.errors && lastName.invalid &&(lastName['dirty']|| lastName['touched'])" class="alert alert-danger">
+              <div *ngIf="lastName.errors!['required']">Last Name is Required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">First Name :</label>
+            <input class="form-control" type="text" formControlName="firstName">
+            <div *ngIf="firstName.errors && firstName.invalid &&(firstName['dirty']|| firstName['touched'])" class="alert alert-danger">
+              <div *ngIf="firstName.errors!['required']">First Name is Required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email :</label>
+            <input class="form-control" type="text" formControlName="email">
+            <div *ngIf="email.errors && email.invalid &&(email['dirty']|| email['touched'])" class="alert alert-danger">
+              <span *ngIf="email.errors!['emailDuplicated']">
+                This Email is already is used
+              </span>
+              <div *ngIf="email.errors!['email']">Email is not correct</div>
+              <div *ngIf="email.errors!['required']">Email is Required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Password :</label>
+            <input class="form-control" type="password" formControlName="password">
+            <div *ngIf="username.errors && password.invalid &&(password['dirty']|| password['touched'])" class="alert alert-danger">
+              <div *ngIf="password.errors!['required']">Password is Required</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Confirm Password :</label>
+            <input class="form-control" type="password" formControlName="confirmPassword">
+            <div *ngIf="username.errors && confirmPassword.invalid &&(confirmPassword['dirty']|| confirmPassword['touched'])" class="alert alert-danger">
+              <div *ngIf="confirmPassword.errors!['required']">Password is Required</div>
+              <div *ngIf="confirmPassword.errors!['ValuesNotMatch']">Passwords Not Match</div>
+            </div>
+          </div>
+          <div class="mb-3">
+
+            <div class="form-check">
+              <input class="form-check-input" type="radio" formControlName="gender" value="MALE">
+              <label class="form-check-label">
+                Male
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" formControlName="gender" value="FEMALE">
+              <label class="form-check-label">
+                Female
+              </label>
+            </div>
+          </div>
+          <button [disabled]="!registrationFormGroup.valid" class="btn btn-info">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</div>

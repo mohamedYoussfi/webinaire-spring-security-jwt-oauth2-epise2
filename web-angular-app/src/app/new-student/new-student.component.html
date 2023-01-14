@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" *ngIf="studentFormGroup">
+      <form [formGroup]="studentFormGroup" (ngSubmit)="saveNewStudent()">
+        <div class="mb-3">
+          <label class="form-label">Name</label>
+          <input class="form-control" type="text" formControlName="name">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Birth date</label>
+          <input class="form-control" type="date" formControlName="birthDate">
+        </div>
+        <div class="mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" formControlName="gender" value="MALE">
+            <label class="form-check-label">Male</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" formControlName="gender" value="FEMALE">
+            <label class="form-check-label">Female</label>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Photo</label>
+          <input class="form-control" type="file"  (change)="selectFile($event)">
+        </div>
+        <button class="btn btn-success">Save</button>
+      </form>
+    </div>
+  </div>
+
+</div>

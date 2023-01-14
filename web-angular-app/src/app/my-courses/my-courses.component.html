@@ -1,0 +1,32 @@
+<div class="p-3">
+  <div class="row">
+    <div class="col-3" *ngFor="let course of courses">
+      <div class="card">
+        <div class="card-header">
+          {{course.title}} | Pr. : {{course.teacher.firstName}}
+          <span class="float-end">
+            <img width="50" class="rounded-circle" [src]="authService.host+'/public/profile/photo/'+course.teacher.userId">
+          </span>
+        </div>
+        <div class="card-body">
+          <div class="row text-sm-start"> Couse ID : {{course.id}}</div>
+          <div class="row">
+            <div class="col-md-4">
+              <img [src]="course.pictureURL | secure | async" class="img-thumbnail" width="100">
+            </div>
+            <div class="col-md-8">
+              <ul class="list-group">
+                <li class="list-group-item">Title: {{course.title}}</li>
+                <li class="list-group-item">Group : {{course.groupName}}</li>
+                <li class="list-group-item">
+                  <button (click)="handleCourseDetails(course)" class="btn btn-success btn-sm">Details</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="m-3">
+  <ul class="nav nav-pills">
+    <li>
+      <button class="btn btn-outline-info" routerLink="/admin/new-user">
+        <i class="bi bi-plus-circle"></i>
+        New User
+      </button>
+    </li>
+    <li>
+      <input class="form-control" [(ngModel)]="keyWord">
+    </li>
+    <li>
+      <button (click)="searchUsers()" class="btn btn-outline-info"><i class="bi bi-search"></i></button>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="col-md-10">
+      <table class="table tab-pane" *ngIf="users">
+        <thead>
+        <tr>
+          <th>Username</th><th>First Name</th><th>Last Name</th>
+          <th>Email</th><th>Status</th><th>Email verified</th><th>Roles</th><th>Requested Roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let u of users">
+          <td>{{u.username}}</td>
+          <td>{{u.firstName}}</td>
+          <td>{{u.lastName}}</td>
+          <td>{{u.email}}</td>
+          <td>
+            <span [ngClass]="u.status=='ACTIVATED'?'alert alert-success':'alert alert-danger'">{{u.status}}</span>
+          </td>
+          <td class="text-center">
+            <span *ngIf="u.emailVerified; else notVerified" class="bi bi-check-circle-fill text-success"></span>
+            <ng-template #notVerified>
+              <i class="bi  bi-x-square text-danger"></i>
+            </ng-template>
+          </td>
+          <td>
+            <ul class="nav nav-pills">
+              <li class="small border border-info ms-1 ps-1 pe-1" *ngFor="let r of u.appRoles">
+                <span>{{r.roleName}}</span>
+                <i (click)="removeRoleFromUser(u, r)" class="btn bi bi-backspace text-danger"></i>
+              </li>
+            </ul>
+          </td>
+          <td>
+            <ul class="nav nav-pills">
+              <li class="small border border-info ms-1 ps-1 pe-1" *ngFor="let r of u.requestedRoles">
+                <span>{{r}}</span>
+                <i (click)="addRoleToUser(u, r, true)" class="btn bi bi-hypnotize text-success"></i>
+              </li>
+            </ul>
+          </td>
+          <td>
+            <select class="form-select" *ngIf="roles" [(ngModel)]="u.roleName">
+              <option value="{{role.roleName}}" *ngFor="let role of roles | async">{{role.roleName}}</option>
+            </select>
+          </td>
+          <td><button (click)="addRoleToUser(u,u.roleName, false)" class="btn btn-success">Add Role</button></td>
+          <td><button (click)="activateAccount(u)" class="btn btn-danger">
+            <span *ngIf="u.status=='ACTIVATED'">DeActivate</span>
+            <span *ngIf="!(u.status=='ACTIVATED')">Activate</span>
+          </button></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

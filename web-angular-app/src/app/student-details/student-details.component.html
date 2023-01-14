@@ -1,0 +1,65 @@
+<div class="p-3" *ngIf="student">
+ <div class="row mt-2">
+   <div class="col-md-4">
+     <div class="card">
+       <div class="card-header">Student's Infos</div>
+       <div class="card-body">
+         <table>
+           <tr>
+             <td>{{student.name}}</td>
+             <td rowspan="4">
+               <img class="img-thumbnail img-fluid" width="200" height="120" [src]="student.photoURL | secure | async" >
+               <div *ngIf="mode==0"><button class="btn btn-success btn-sm">
+                 <i class="bi bi-upload" (click)="mode=1"></i>
+               </button></div>
+               <div *ngIf="mode==1" class="input-group">
+                 <input class="form-control" type="file" (change)="selectFile($event)">
+                 <button class="btn btn-primary btn-sm" (click)="updatePhotoProfile()">
+                   <i class="bi bi-upload"></i>
+                 </button>
+                 <button class="btn btn-danger btn-sm" (click)="mode=0">
+                   <i class="bi bi-door-closed"></i>
+                 </button>
+               </div>
+             </td>
+           </tr>
+           <tr>
+             <td>{{student.birthDate | date : 'dd/MM/yyyy'}}</td>
+           </tr>
+           <tr>
+             <td>{{student.gender}}</td>
+           </tr>
+           <tr>
+             <td></td>
+           </tr>
+         </table>
+       </div>
+     </div>
+   </div>
+   <div class="col-md-8">
+     <div class="card">
+       <div class="card-header">Materials</div>
+       <div class="card-body">
+         <table class="table">
+           <thead>
+           <tr>
+             <th>ID</th><th>Label</th><th>File</th>
+           </tr>
+           <tr>
+             <th><input class="form-control" type="text" [(ngModel)]="materialLabel"></th>
+             <th><input class="form-control" type="file" (change)="selectMaterialFile($event)"></th>
+             <td><button class="btn btn-success" (click)="addMaterial()">Add</button></td>
+           </tr>
+           </thead>
+           <tbody>
+           <tr *ngFor="let mat of student.materials">
+             <td>{{mat.label}}</td>
+             <td><img class="img-thumbnail img-fluid" width="200" height="120" [src]="mat.materialURL | secure | async"></td>
+           </tr>
+           </tbody>
+         </table>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>

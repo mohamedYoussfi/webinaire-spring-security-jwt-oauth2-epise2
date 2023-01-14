@@ -1,0 +1,28 @@
+<div class="p-3">
+  <ul class="nav nav-pills">
+    <li>
+      <label>Course ID :</label>
+    </li>
+    <li>
+      <input class="form-control" [(ngModel)]="courseId">
+    </li>
+    <li>
+      <button class="btn btn-outline-info" (click)="addNewSubscription()">Subscribe</button>
+    </li>
+  </ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th><th>Date</th><th>Course</th><th>Teacher</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr *ngFor="let sub of subscriptions">
+       <td>{{sub.id}}</td>
+       <td>{{sub.date}}</td>
+       <td>{{sub.course.title}}</td>
+       <td>{{sub.course.teacher.firstName}}</td>
+     </tr>
+    </tbody>
+  </table>
+</div>

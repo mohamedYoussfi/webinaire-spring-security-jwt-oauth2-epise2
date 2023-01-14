@@ -1,0 +1,57 @@
+<div class="p-3">
+  <ul class="nav nav-pills">
+    <li *ngFor="let c of courses">
+      <a [ngClass]="currentCourse==c?'btn-danger':'btn-outline-info'" class="btn  m-1" (click)="setCurrentCourse(c)">{{c.title}}</a>
+    </li>
+  </ul>
+  <div class="card" *ngIf="currentCourse">
+    <div class="card-header">Course : {{currentCourse.id}}</div>
+    <div class="card-body">
+      <table class="table table-sm">
+        <tr>
+          <td rowspan="6">
+            <div>
+              <img [src]="currentCourse.pictureURL | secure | async" class="img-thumbnail" width="100">
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Course ID : {{currentCourse.id}}</td>
+        </tr>
+        <tr>
+          <td>Group name: {{currentCourse.groupName}}</td>
+        </tr>
+        <tr>
+          <td>
+            <div>
+              <button class="btn btn-info" (click)="mode=1">
+                <i class="bi bi-upload"></i>
+              </button>
+            </div>
+            <div *ngIf="mode==1" class="small">
+              <input type="file" (change)="selectFile($event)">
+              <button class="btn btn-info btn-sm" (click)="uploadCoursePhoto()"><i class="bi bi-upload"></i></button>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <table class="table" *ngIf="subscriptions">
+        <thead>
+        <tr>
+          <th>Profile</th><th>First Name</th> <th>Last Name</th><th>Email</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let sub of subscriptions">
+          <td><img width="50" class="rounded-circle" [src]="authService.host+'/public/profile/photo/'+sub.student.userID"></td>
+          <td>{{sub.student.firstName}}</td>
+          <td>{{sub.student.lastName}}</td>
+          <td>{{sub.student.email}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div> </div>
+
+    </div>
+  </div>
+</div>

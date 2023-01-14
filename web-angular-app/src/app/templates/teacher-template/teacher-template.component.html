@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+  <div class="container-fluid">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" >Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/teacher/students">Students</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Students</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" routerLink="/teacher/students">List</a></li>
+          <li><a class="dropdown-item" routerLink="/teacher/new-student">New</a></li>
+        </ul>
+      </li>
+    </ul>
+    <ul class="navbar-nav float-end">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">{{authService.userProfile!.username}}</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" (click)="onLogout()">Logout</a></li>
+          <li><a class="dropdown-item" routerLink="/teacher/profile">Profile</a></li>
+          <li><a class="dropdown-item" href="#">Search</a></li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <ng-template #noProfile>
+          <img width="30" class="img-thumbnail" src="/assets/up.jpeg">
+        </ng-template>
+
+        <img width="30" class="img-thumbnail" [src]="authService.userProfile!.photoURL+'?ts='+authService.ts  | secure | async" >
+
+      </li>
+    </ul>
+  </div>
+</nav>
+<router-outlet></router-outlet>

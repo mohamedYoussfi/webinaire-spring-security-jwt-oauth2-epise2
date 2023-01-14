@@ -1,0 +1,17 @@
+<div class="p-3">
+  <form [formGroup]="newCourseFormGroup" (ngSubmit)="addNewCourse()">
+    <div class="mb-3">
+      <label class="form-label">Title</label>
+      <input type="text" formControlName="title" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Group Name</label>
+      <input type="text" formControlName="groupName" class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Illustration</label>
+      <input type="file" class="form-control" (change)="selectFile($event)">
+    </div>
+    <button class="btn btn-info">Save</button>
+  </form>
+</div>

@@ -1,0 +1,68 @@
+<div class="p-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">Profile</div>
+        <div class="card-body small">
+          <div class="row" *ngIf="profile">
+            <div class="col-md-2">
+              <ng-template #noProfile>
+                <img width="100" class="img-thumbnail" src="/assets/up.jpeg">
+              </ng-template>
+              <img *ngIf="profile.photoURL; else noProfile" width="100" class="img-thumbnail" [src]="profile!.photoURL+'?ts='+timeStamp  | secure | async" >
+              <div *ngIf="mode==0">
+                <button class="btn btn-success btn-sm" (click)="mode=1">
+                  <i class="bi bi-upload"></i>
+                </button>
+              </div>
+            </div>
+            <div class="col-md-10">
+              <ul class="list-group">
+                <li class="list-group-item">UserName : {{profile.username}}</li>
+                <li class="list-group-item">First Name : {{profile.firstName}}</li>
+                <li class="list-group-item">Last Name : {{profile.lastName}}</li>
+                <li class="list-group-item">Email : {{profile.email}}</li>
+                <li class="list-group-item">Email Verified : {{profile.emailVerified?'YES': 'NO'}} :
+                  <button *ngIf="!profile.emailVerified" class="btn btn-success btn-sm" (click)="verifyEmail(profile)">
+                    Verify Your Email
+                  </button>
+                </li>
+                <li class="list-group-item">Status : {{profile.status}}</li>
+                <li class="list-group-item" *ngIf="mode==1">
+                    <input type="file" (change)="selectFile($event)">
+                    <button class="btn btn-success btn-sm" (click)="uploadFile()">
+                      <i class="bi bi-upload"></i>
+                    </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header">Change Password</div>
+        <div class="card-body">
+          <form [formGroup]="changePwFormGroup" (ngSubmit)="changePassword()">
+            <div class="mb-3">
+              <label class="form-label">Current Password</label>
+              <input class="form-control" type="password" formControlName="currentPassword">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">New Password</label>
+              <input class="form-control" type="password" formControlName="newPassword">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Confirm Password</label>
+              <input class="form-control" type="password" formControlName="confirmPassword">
+            </div>
+            <button class="btn btn btn-danger">Changer Password</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

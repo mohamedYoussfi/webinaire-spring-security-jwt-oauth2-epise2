@@ -1,0 +1,28 @@
+<div class="p-1 m-1" *ngIf="students">
+  <div class="row mt-2">
+    <div class="col-3 mt-2" *ngFor="let st of students">
+      <div class="card">
+        <div class="card-header">{{st.id}}</div>
+        <div class="card-body">
+          <table>
+            <tr>
+              <td>{{st.name}}</td>
+              <td rowspan="4">
+                <img class="btn img-thumbnail img-fluid" (click)="handleStudentDetail(st)" width="200" height="120" [src]="st.photoURL | secure | async">
+              </td>
+            </tr>
+            <tr>
+              <td>{{st.birthDate | date : 'dd/MM/yyyy'}}</td>
+            </tr>
+            <tr>
+              <td>{{st.gender}}</td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-md-6 offset-3">
+      <div class="card">
+        <div class="card-header">Authentication</div>
+        <div class="card-body">
+          <div class="text-danger">{{errorMessage}}</div>
+          <form [formGroup]="loginFormGroup" (ngSubmit)="handleLogin()">
+            <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" class="form-control" formControlName="username">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" class="form-control" formControlName="password">
+            </div>
+            <button class="btn btn-success">Login</button>
+            <a class="btn btn-link" routerLink="/registration">Register</a>
+            <a class="btn btn-link" routerLink="/forgotPassWord">Forgot Password</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
